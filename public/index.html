@@ -14,18 +14,22 @@
     <!-- Google fonts -->
      <link href="https://fonts.googleapis.com/css2?family=Knewave&display=swap" rel="stylesheet">
 
-    <title>la35chat</title>
+    <title>lajeymonduela-chat</title>
   </head>
   <body>
     <!-- Top level container -->
     <div class="container">
       <!-- Header -->
       <div class="header">
-        <span>la35chat</span>
+        <span>lajeymonduela-chat</span>
         <input id="nick" size="10" class="nick-input" placeholder="Nombre *" value="" autocomplete="off">
+
+<div id="MyClockDisplay" class="clock" onload="showTime()"></div>
+
+
       </div>
       <!-- Messages container -->
-      <div class="messages" id="messages"></div>
+      <div class="messages" id="messages" onload="showTime()"></div>
       <!-- Message form -->
       <form id="form" class="form" action="">
         <input id="msg" class="" autocomplete="off" placeholder="Mensaje">
