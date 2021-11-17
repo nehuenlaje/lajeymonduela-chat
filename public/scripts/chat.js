@@ -36,6 +36,22 @@ document.getElementById('form').addEventListener('submit', (e) => {
   return false;
 });
 
+socket.on('chat message', (msg) => {
+  const div = document.createElement('div');
+  const nick = document.createElement('span');
+  const message = document.createElement('span');
+  nick.classList.add('nick');
+  nick.innerHTML = msg.nick;
+  message.innerHTML = msg.text;
+  div.append(nick);
+  div.append(document.createElement('br'));
+  div.append(message);
+  div.classList.add('chat-message');
+  document.getElementById('messages').append(div);
+  div.scrollIntoView();
+})
+
+
 function showTime(){
     var date = new Date();
     var h = date.getHours(); // 0 - 23

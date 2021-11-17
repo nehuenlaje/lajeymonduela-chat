@@ -1,8 +1,9 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const app = express();
+const mongoose = require('mongoose');
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
+
 
 let usersConnected = 0;
 
@@ -15,6 +16,8 @@ const MessageSchema = new mongoose.Schema({
 const Message = mongoose.model('Message', MessageSchema);
 app.use(express.static('public'));
 
+
+
 io.on('connection', (socket) => {
   console.log('a user connected');
   usersConnected += 1;
@@ -22,8 +25,9 @@ io.on('connection', (socket) => {
   socket.on('chat message', (msg) => {
     // DEBUG: console.log(msg);
     const message = new Message(msg);
+    console.log(message);
     socket.broadcast.emit('chat message', msg);
-    message.save((err, msg) => console.log(msg));
+    message.save((err, msg) => console.log('mensaje guardado'));
   });
   socket.on('disconnect', () => {
     console.log('user disconnected');

@@ -7,6 +7,9 @@ html, body {
 }
 body {
     background: white;
+    background-image: url('panorama-patio-taller.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .clock {
