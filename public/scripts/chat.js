@@ -82,4 +82,34 @@ function showTime(){
 
 showTime();
 
+function getMessageHistory() {
+  fetch('/api/messages')
+    .then(res => res.json())
+    .then(mensajes => {
+      console.log(mensajes);
+      for (let mensaje of mensajes) {
+        //console.log(mensaje);
+        // poner cada mensaje en la pantalla
+        let div = document.createElement('div');
+        let nickText = document.createElement('span');
+        let messageText = document.createElement('span');
+        let timeText = document.createElement('span');
+        nickText.innerHTML = mensaje.nick;
+        messageText.innerHTML = mensaje.text;
+        let fecha = new Date(mensaje.date)
+        timeText.innerHTML = fecha.getHours() +':'+ fecha.getMinutes();
+        div.append(nickText);
+        div.append(document.createElement('br'));
+        div.append(messageText);
+        div.append(document.createElement('br'));
+        div.append(timeText);
+        div.classList.add('chat-message');
+        document.getElementById('messages').append(div);
+        div.scrollIntoView();
+      }
+    })
+    .catch(err => console.log(err));
+}
+getMessageHistory();
+
 // TODO: agregar nicknames

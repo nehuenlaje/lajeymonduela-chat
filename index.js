@@ -11,7 +11,8 @@ const port = process.env.PORT || 3000;
 const db = 'mongodb://localhost/lajeymonduela_chat'
 mongoose.connect(db);
 const MessageSchema = new mongoose.Schema({
-  nick: String, text: String
+  nick: String, text: String,
+  date: { type: Date, default: Date.now }
 });
 const Message = mongoose.model('Message', MessageSchema);
 app.use(express.static('public'));
@@ -33,6 +34,12 @@ io.on('connection', (socket) => {
     console.log('user disconnected');
     usersConnected -= 1;
     console.log('usuarios conectados: ' + usersConnected);
+  });
+});
+
+app.get('/api/messages', (req, res) => {
+  Message.find().sort({ date: 1 }).exec((err, messages) => {
+    res.status(200).json(messages);
   });
 });
 
